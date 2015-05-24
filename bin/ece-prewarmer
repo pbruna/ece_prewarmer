@@ -1,0 +1,61 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'ece_prewarmer'
+require 'optparse'
+
+# Parsing options
+ARGV << '-h' if ARGV.empty?
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+  opts.banner = 'Usage: ece-prewarmer --site [www.24horas.cl] --host [next-presentation-1.tvn.org]'
+
+  opts.on('-sSITE', '--site=SITE', 'El sitio web') do |o|
+    options[:website] = o
+  end
+
+  opts.on('-i', '--ipaddress=HOST', 'IP Address del servidor Presentation') do |o|
+    options[:host] = o
+  end
+
+  opts.on('-pPORT', '--port=PORT', 'El puerto destino, 80 por defecto') do |o|
+    options[:port] = o.nil? ? nil : o.to_i
+  end
+
+  opts.on('-dDEPTH', '--depth=DEPTH', 'Limite de links a seguir') do |o|
+    options[:depth_limit] = o.nil? ? nil : o.to_i
+  end
+
+  opts.on('-tTHREADS', '--threads=THREADS', 'Procesos a lanzar') do |o|
+    options[:threads] = o.nil? ? nil : o.to_i
+  end
+
+  opts.on('-V', '--version', 'Version') do |o|
+    puts EcePrewarmer::VERSION
+    exit
+  end
+
+  opts.on('-v', '--verbose', 'Mas debug') do |o|
+    options[:verbose] = true
+  end
+
+  opts.on('-h', '--help', 'Esta ayuda') do
+    puts opts
+    exit
+  end
+end
+
+optparse.parse!
+opts = {}
+host = options[:host]
+website = options[:website]
+opts[:verbose] = options[:verbose]
+opts[:port] = options[:port]
+opts[:threads] = options[:threads]
+opts[:depth_limit] = options[:depth_limit]
+
+results = EcePrewarmer.prewarm(host, website, opts)
+
+puts "Paginas visitadas: #{results.size}\n"
