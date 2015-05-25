@@ -8,6 +8,14 @@ Se usa mas o menos así:
 [host ]$ screen
 [host ]$ unset http_proxy
 [host ]$ ece-prewarmer -s www.24horas.cl -i 10.132.17.114 -p 8080 -v -t 8
+http://www.24horas.cl:8080/ Queue: 0
+http://www.24horas.cl:8080/envivo/ Queue: 104
+http://www.24horas.cl:8080/internacional/ Queue: 103
+http://www.24horas.cl:8080/nacional/ Queue: 137
+http://www.24horas.cl:8080/videos/ Queue: 169
+http://www.24horas.cl:8080/galerias/ Queue: 168
+http://www.24horas.cl:8080/envivo/?articleId=221352 Queue: 167
+http://www.24horas.cl:8080/envivo/?articleId=110846 Queue: 166
 ```
 
 ## Installation
