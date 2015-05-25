@@ -1,28 +1,35 @@
 # EcePrewarmer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ece_prewarmer`. To experiment with that code, run `bin/console` for an interactive prompt.
+Script para pre-calentar servidores escenic.
 
-TODO: Delete this and the text above, and describe your gem
+Se usa mas o menos así:
+
+```bash
+[host ]$ screen
+[host ]$ unset http_proxy
+[host ]$ ece-prewarmer -s www.24horas.cl -i 10.132.17.114 -p 8080 -v -t 8
+```
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'ece_prewarmer'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it yourself as:
 
     $ gem install ece_prewarmer
 
 ## Usage
 
-TODO: Write usage instructions here
+```bash
+[host]$ ece-prewarmer --help
+Usage: ece-prewarmer --site [www.24horas.cl] --host [next-presentation-1.tvn.org]
+    -s, --site=SITE                  El sitio web
+    -i, --ipaddress=HOST             IP Address del servidor Presentation
+    -p, --port=PORT                  El puerto destino, 80 por defecto
+    -d, --depth=DEPTH                Limite de links a seguir
+    -t, --threads=THREADS            Procesos a lanzar
+    -V, --version                    Version
+    -v, --verbose                    Mas debug
+    -h, --help                       Esta ayuda
+```
 
 ## Development
 

@@ -59,3 +59,10 @@ opts[:depth_limit] = options[:depth_limit]
 results = EcePrewarmer.prewarm(host, website, opts)
 
 puts "Paginas visitadas: #{results.size}\n"
+
+
+BEGIN {
+  at_exit {
+    EcePrewarmer.remove_host_alias(website)
+  }
+}

@@ -33,7 +33,7 @@ module EcePrewarmer
 
   def self.crawl(url, port, verbose, threads, depth)
     result = []
-    Anemone.crawl(url, verbose: verbose, threads: threads, depth_limit: 2) do |anemone|
+    Anemone.crawl(url, verbose: verbose, threads: threads, depth_limit: depth) do |anemone|
       links = []
       anemone.on_every_page do |page|
         links.push page.url
