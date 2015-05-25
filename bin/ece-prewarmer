@@ -59,14 +59,14 @@ opts[:depth_limit] = options[:depth_limit]
 # Trap ^C
 Signal.trap("INT") {
   puts "Eliminando entrada #{website} de hosts file"
-  FileUtils.cp "tmp/#{file}", '/etc/hosts'
+  FileUtils.cp "/tmp/#{file}", '/etc/hosts'
   exit
 }
 
 # Trap `Kill `
 Signal.trap("TERM") {
   puts "Eliminando entrada #{website} de hosts file"
-  FileUtils.cp "tmp/#{file}", '/etc/hosts'
+  FileUtils.cp "/tmp/#{file}", '/etc/hosts'
   exit
 }
 
