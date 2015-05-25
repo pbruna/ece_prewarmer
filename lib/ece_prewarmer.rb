@@ -16,8 +16,11 @@ module EcePrewarmer
   def self.remove_host_alias(hostname, file = nil)
     file ||= '/etc/hosts'
     hosts = Hosts::File.read(file)
-    to_delete = hosts.elements.each_with_index.map {|e,i| i if e.name == hostname }.compact
-    to_delete.each { |i| hosts.elements[i] = nil }
+    to_delete = hosts.elements.each_with_index.map do |e,i|
+      return nil unless e.is_a? Aef::Hosts::Entry
+      i if e.name == hostname
+    end
+    to_delete.compact.each { |i| hosts.elements[i] = nil }
     hosts.elements.compact!
     hosts.write
   end
