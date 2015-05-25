@@ -56,10 +56,21 @@ opts[:port] = options[:port]
 opts[:threads] = options[:threads]
 opts[:depth_limit] = options[:depth_limit]
 
+# Trap ^C
+Signal.trap("INT") {
+  shut_down
+  exit
+}
+
+# Trap `Kill `
+Signal.trap("TERM") {
+  shut_down
+  exit
+}
+
 results = EcePrewarmer.prewarm(host, website, opts)
 
 puts "Paginas visitadas: #{results.size}\n"
-
 
 BEGIN {
   at_exit {
