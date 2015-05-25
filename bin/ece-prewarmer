@@ -60,8 +60,8 @@ def shutdown
   Thread.list.each do |thread|
     thread.exit unless thread == Thread.current
   end
-  puts "Eliminando entrada #{website} de hosts file"
-  FileUtils.cp "/tmp/#{file}", '/etc/hosts'
+  puts "Eliminando entrada  de hosts file"
+  FileUtils.cp "/tmp/hosts", '/etc/hosts'
 end
 
 # Trap ^C
