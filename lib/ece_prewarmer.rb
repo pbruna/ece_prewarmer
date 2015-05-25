@@ -7,6 +7,7 @@ module EcePrewarmer
 
   def self.add_host_alias(ip, host_alias, file = nil)
     file ||= '/etc/hosts'
+    FileUtils.cp file, "tmp/#{file}"
     hosts = Hosts::File.read(file)
     hosts.elements << Hosts::Entry.new(ip, host_alias)
     hosts.invalidate_cache!
