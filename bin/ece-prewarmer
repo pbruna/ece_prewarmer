@@ -56,17 +56,23 @@ opts[:port] = options[:port]
 opts[:threads] = options[:threads]
 opts[:depth_limit] = options[:depth_limit]
 
-# Trap ^C
-Signal.trap("INT") {
+def shutdown
+  Thread.list.each do |thread|
+    thread.exit unless thread == Thread.current
+  end
   puts "Eliminando entrada #{website} de hosts file"
   FileUtils.cp "/tmp/#{file}", '/etc/hosts'
+end
+
+# Trap ^C
+Signal.trap("INT") {
+  shutdown
   exit
 }
 
 # Trap `Kill `
 Signal.trap("TERM") {
-  puts "Eliminando entrada #{website} de hosts file"
-  FileUtils.cp "/tmp/#{file}", '/etc/hosts'
+  shutdown
   exit
 }
 
