@@ -22,6 +22,7 @@ module EcePrewarmer
     end
     to_delete.compact.each { |i| hosts.elements[i] = nil }
     hosts.elements.compact!
+    hosts.invalidate_cache!
     hosts.write
   end
 
