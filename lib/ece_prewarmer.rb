@@ -31,14 +31,14 @@ module EcePrewarmer
     opts = parse_opts opts
     url = "http://#{website}:#{opts[:port]}/"
     add_host_alias(host, website, opts[:hostfile])
-    results = crawl(url, opts[:port], opts[:verbose], opts[:threads], opts[:depth_limit])
+    results = crawl(url, opts[:port], opts[:verbose], opts[:threads], opts[:depth_limit], opts[:user_agent])
     remove_host_alias(website, opts[:hostfile])
     results
   end
 
-  def self.crawl(url, port, verbose, threads, depth)
+  def self.crawl(url, port, verbose, threads, depth, user_agent)
     result = []
-    Anemone.crawl(url, verbose: verbose, threads: threads, depth_limit: depth) do |anemone|
+    Anemone.crawl(url, verbose: verbose, threads: threads, depth_limit: depth, user_agent: user_agent) do |anemone|
       links = []
       anemone.on_every_page do |page|
         links.push page.url
@@ -60,6 +60,8 @@ module EcePrewarmer
     opts[:verbose] ||= false
     opts[:port] ||= 80
     opts[:depth_limit] ||= false
+    # Chrome by default
+    opts[:user_agent] ||= "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36"
     opts
   end
 

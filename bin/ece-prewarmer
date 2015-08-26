@@ -28,6 +28,10 @@ optparse = OptionParser.new do |opts|
     options[:depth_limit] = o.nil? ? nil : o.to_i
   end
 
+  opts.on('-dUSERAGENT', '--depth=USER-AGENT', 'USER-AGENT a usar') do |o|
+    options[:user_agent] = o.nil? ? nil : o.to_i
+  end
+
   opts.on('-tTHREADS', '--threads=THREADS', 'Procesos a lanzar') do |o|
     options[:threads] = o.nil? ? nil : o.to_i
   end
@@ -55,6 +59,7 @@ opts[:verbose] = options[:verbose]
 opts[:port] = options[:port]
 opts[:threads] = options[:threads]
 opts[:depth_limit] = options[:depth_limit]
+opts[:user_agent] = options[:user_agent]
 
 def shutdown
   Thread.list.each do |thread|
