@@ -28,7 +28,7 @@ optparse = OptionParser.new do |opts|
     options[:depth_limit] = o.nil? ? nil : o.to_i
   end
 
-  opts.on('-dUSERAGENT', '--depth=USER-AGENT', 'USER-AGENT a usar') do |o|
+  opts.on('-uUSERAGENT', '--useragent=USER-AGENT', 'USER-AGENT a usar') do |o|
     options[:user_agent] = o.nil? ? nil : o.to_i
   end
 
