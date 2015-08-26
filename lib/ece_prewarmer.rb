@@ -31,6 +31,7 @@ module EcePrewarmer
     opts = parse_opts opts
     url = "http://#{website}:#{opts[:port]}/"
     add_host_alias(host, website, opts[:hostfile])
+    url = opts[:params].nil? ? url : url + opts[:params].nil?
     results = crawl(url, opts[:port], opts[:verbose], opts[:threads], opts[:depth_limit], opts[:user_agent])
     remove_host_alias(website, opts[:hostfile])
     results

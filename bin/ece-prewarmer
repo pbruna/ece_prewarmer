@@ -36,6 +36,10 @@ optparse = OptionParser.new do |opts|
     options[:threads] = o.nil? ? nil : o.to_i
   end
 
+  opts.on('-aTHREADS', '--addparam=PARAMS', '?PARAMS....') do |o|
+    options[:params] = o.nil? ? nil : o.to_s
+  end
+
   opts.on('-V', '--version', 'Version') do |o|
     puts EcePrewarmer::VERSION
     exit
@@ -60,6 +64,7 @@ opts[:port] = options[:port]
 opts[:threads] = options[:threads]
 opts[:depth_limit] = options[:depth_limit]
 opts[:user_agent] = options[:user_agent]
+opts[:params] = options[:params]
 
 def shutdown
   Thread.list.each do |thread|
