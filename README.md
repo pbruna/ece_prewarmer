@@ -7,7 +7,7 @@ Se usa mas o menos así:
 ```bash
 [host ]$ screen
 [host ]$ unset http_proxy
-[host ]$ ece-prewarmer -s www.24horas.cl -i 10.132.17.114 -p 8080 -v -t 8
+[host ]$ ece-prewarmer -s www.24horas.cl -i 10.132.17.114 -p 8080 -v -t 8 -u 'Android'
 http://www.24horas.cl:8080/ Queue: 0
 http://www.24horas.cl:8080/envivo/ Queue: 104
 http://www.24horas.cl:8080/internacional/ Queue: 103
@@ -33,6 +33,7 @@ Usage: ece-prewarmer --site [www.24horas.cl] --host [next-presentation-1.tvn.org
     -i, --ipaddress=HOST             IP Address del servidor Presentation
     -p, --port=PORT                  El puerto destino, 80 por defecto
     -d, --depth=DEPTH                Limite de links a seguir
+    -u, --useragent=USER-AGENT       USER-AGENT a usar
     -t, --threads=THREADS            Procesos a lanzar
     -V, --version                    Version
     -v, --verbose                    Mas debug
