@@ -40,6 +40,10 @@ optparse = OptionParser.new do |opts|
     options[:params] = o.nil? ? nil : o.to_s
   end
 
+  opts.on('-HHOSTFILE', '--hostfile=HOSTFILE', 'Archivo hosts') do |o|
+    options[:hostfile] = o.nil? ? nil : o.to_s
+  end
+
   opts.on('-V', '--version', 'Version') do |o|
     puts EcePrewarmer::VERSION
     exit
@@ -65,13 +69,14 @@ opts[:threads] = options[:threads]
 opts[:depth_limit] = options[:depth_limit]
 opts[:user_agent] = options[:user_agent]
 opts[:params] = options[:params]
+opts[:hostfile] = options[:hostfile]
 
 def shutdown
   Thread.list.each do |thread|
     thread.exit unless thread == Thread.current
   end
   puts "Eliminando entrada  de hosts file"
-  FileUtils.cp "/tmp/hosts", '/etc/hosts'
+  FileUtils.cp "/tmp/hosts", '/etc/hosts' if opts[:hostfile] == "/etc/hosts"
 end
 
 # Trap ^C
